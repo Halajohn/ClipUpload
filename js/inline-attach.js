@@ -63,7 +63,7 @@
 			formData.append("comment", clipup_vars.comment);
 			formData.append("format", "json");
 			//token这里是
-			formData.append("token", mw.user.tokens.get('editToken'));
+			formData.append("token", mw.user.tokens.get('csrfToken'));
 
 			//todo：改写post数据包含更多参数
 			xhr.open('POST', settings.uploadUrl);
@@ -158,8 +158,8 @@
 		 * @param {Object} data
 		 */
 		this.onErrorUploading = function() {
-			//默认删除一切						
-			ink_replace(lastValue,"");	
+			//默认删除一切
+			ink_replace(lastValue,"");
 			if (settings.customErrorHandler()) {
 				window.alert(settings.errorText);
 			}
@@ -201,11 +201,11 @@
 		 */
 		this.onPaste = function(ev, data) {
 			this.onReceivedFile(data.blob);
-			
+
 			if (this.customUploadHandler(data.blob)) {
 				this.uploadFile(data.blob);
 			}
-			
+
 			return true;
 		};
 
@@ -299,9 +299,9 @@
 
 		var editor = new inlineAttach.Editor(input),
 			inlineattach = new inlineAttach(options, editor);
-		
+
 		$(input).pastableTextarea();
-		
+
 		$(input).on('pasteImage', function(ev, data) {
 			inlineattach.onPaste(ev, data);
 		});
